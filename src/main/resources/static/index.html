@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industry Readiness Scoring System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    .input-field {
+      transition: all 0.2s ease;
+    }
+    
+    .input-field:focus {
+      transform: translateY(-1px);
+    }
+    
+    .calculate-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .calculate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px -5px rgba(37, 99, 235, 0.4);
+    }
+    
+    .calculate-btn:active {
+      transform: translateY(0);
+    }
+    
+    .result-card {
+      animation: slideUp 0.4s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .checkbox-custom {
+      transition: all 0.2s ease;
+    }
+    
+    .checkbox-custom:checked {
+      background-color: #2563eb;
+    }
+    
+    .score-circle {
+      animation: scaleIn 0.5s ease-out;
+    }
+    
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+  <div class="h-full w-full overflow-auto">
+   <div class="min-h-full w-full flex items-center justify-center p-4 py-8">
+    <div class="w-full max-w-xl"><!-- Main Card -->
+     <div class="bg-white rounded-2xl shadow-xl shadow-blue-100/50 overflow-hidden"><!-- Header -->
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
+       <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg>
+        </div>
+        <h1 id="main-title" class="text-2xl font-bold text-white">Industry Readiness Check</h1>
+       </div>
+       <p id="subtitle-text" class="text-blue-100 text-sm ml-13">Evaluate a student's readiness for industry roles</p>
+      </div><!-- Form Content -->
+      <div class="p-8">
+       <form id="scoring-form" class="space-y-6"><!-- Numeric Inputs Grid -->
+        <div class="grid grid-cols-2 gap-4"><!-- Certificates -->
+         <div class="space-y-2"><label for="certificates" class="block text-sm font-medium text-slate-700"> Number of Certificates </label> <input type="number" id="certificates" min="0" max="50" value="0" class="input-field w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+         </div><!-- CS Skill Levels -->
+         <div class="space-y-2"><label for="skills" class="block text-sm font-medium text-slate-700"> CS Skill Levels </label> <input type="number" id="skills" min="0" max="10" step="0.1" value="0" class="input-field w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+         </div><!-- CGPA -->
+         <div class="space-y-2"><label for="cgpa" class="block text-sm font-medium text-slate-700"> CGPA </label> <input type="number" id="cgpa" min="0" max="10" step="0.01" value="0" class="input-field w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+         </div><!-- Mini Projects -->
+         <div class="space-y-2"><label for="mini-projects" class="block text-sm font-medium text-slate-700"> Mini Projects </label> <input type="number" id="mini-projects" min="0" max="20" value="0" class="input-field w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+         </div><!-- Major Projects -->
+         <div class="space-y-2"><label for="major-projects" class="block text-sm font-medium text-slate-700"> Major Projects </label> <input type="number" id="major-projects" min="0" max="10" value="0" class="input-field w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+         </div><!-- Industry Projects -->
+         <div class="space-y-2"><label for="industry-projects" class="block text-sm font-medium text-slate-700"> Industry Projects </label> <input type="number" id="industry-projects" min="0" max="10" value="0" class="input-field w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+         </div>
+        </div><!-- Checkbox Section -->
+        <div class="bg-slate-50 rounded-xl p-4 space-y-3">
+         <p class="text-sm font-medium text-slate-600 mb-3">Aptitude Assessment</p><label class="flex items-center gap-3 cursor-pointer group"> <input type="checkbox" id="aptitude-completed" class="checkbox-custom w-5 h-5 rounded-md border-2 border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"> <span class="text-sm text-slate-700 group-hover:text-slate-900 transition-colors"> Aptitude Test Completed </span> </label> <label class="flex items-center gap-3 cursor-pointer group"> <input type="checkbox" id="high-aptitude" class="checkbox-custom w-5 h-5 rounded-md border-2 border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"> <span class="text-sm text-slate-700 group-hover:text-slate-900 transition-colors"> High Aptitude Score </span> </label>
+        </div><!-- Calculate Button --> <button type="submit" id="calculate-btn" class="calculate-btn w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-blue-500/30 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"> Calculate Score </button>
+       </form><!-- Result Section -->
+       <div id="result-section" class="hidden mt-6">
+        <div class="result-card bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 border border-slate-200">
+         <div class="flex items-center justify-between"><!-- Score Display -->
+          <div class="flex items-center gap-4">
+           <div id="score-circle" class="score-circle w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30"><span id="score-value" class="text-2xl font-bold text-white">0</span>
+           </div>
+           <div>
+            <p class="text-sm text-slate-500 font-medium">Readiness Score</p>
+            <p id="score-label" class="text-lg font-bold text-slate-800">Calculating...</p>
+           </div>
+          </div><!-- Status Badge -->
+          <div id="status-badge" class="px-4 py-2 rounded-full text-sm font-semibold">
+           --
+          </div>
+         </div><!-- Progress Bar -->
+         <div class="mt-5">
+          <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+           <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+          </div>
+          <div class="flex justify-between mt-2 text-xs text-slate-400"><span>0</span> <span>50</span> <span>100</span>
+          </div>
+         </div><!-- Breakdown -->
+         <div id="breakdown" class="mt-5 pt-5 border-t border-slate-200">
+          <p class="text-xs font-medium text-slate-500 uppercase tracking-wide mb-3">Score Breakdown</p>
+          <div id="breakdown-content" class="grid grid-cols-2 gap-2 text-sm"></div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Footer -->
+      <div class="bg-slate-50 px-8 py-4 border-t border-slate-100">
+       <p class="text-xs text-slate-400 text-center">Industry Readiness Scoring System • Academic Evaluation Tool</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+  async function submitToBackend() {
+    const data = {
+      certificates: parseInt(document.getElementById('certificates').value) || 0,
+      csLevels: parseInt(document.getElementById('skills').value) || 0,
+      cgpa: parseFloat(document.getElementById('cgpa').value) || 0,
+      miniProjects: parseInt(document.getElementById('mini-projects').value) || 0,
+      majorProjects: parseInt(document.getElementById('major-projects').value) || 0,
+      industryProjects: parseInt(document.getElementById('industry-projects').value) || 0,
+      aptitudeCompleted: document.getElementById('aptitude-completed').checked,
+      highAptitudeScore: document.getElementById('high-aptitude').checked
+    };
+
+    const response = await fetch("/student/readiness", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    displayResult({
+      score: result.score,
+      breakdown: {
+        certificates: data.certificates,
+        skills: data.csLevels,
+        cgpa: data.cgpa,
+        miniProjects: data.miniProjects,
+        majorProjects: data.majorProjects,
+        industryProjects: data.industryProjects,
+        aptitude: data.aptitudeCompleted ? 10 : 0,
+        highAptitude: data.highAptitudeScore ? 10 : 0
+      }
+    });
+  }
+  </script>
+
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cb11d6a76d37e93',t:'MTc3MDYxNjQ5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
